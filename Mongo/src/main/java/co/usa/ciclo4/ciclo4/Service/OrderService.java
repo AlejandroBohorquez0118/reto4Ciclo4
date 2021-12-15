@@ -31,6 +31,8 @@ public class OrderService {
 
     @Autowired
     private MongoTemplate mongoTemplate;
+    
+    @Autowired
     private OrderRepository orderRepo;
 
     public List<Order> getAll() {
