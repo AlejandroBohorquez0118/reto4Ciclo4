@@ -126,8 +126,9 @@ public class OrderService {
 
     public List<Order> getDate(String fecha, Integer id) throws ParseException{
         SimpleDateFormat dateDay = new SimpleDateFormat("yyyy-MM-dd");
-        
+        System.out.println(fecha);
         Date date = dateDay.parse(fecha);
+        System.out.println(date);
         return orderRepo.getDate(date, id);
         
     }
