@@ -114,7 +114,7 @@ public class OrderController {
     @GetMapping("/date/{fecha}/{id}")
     public List<Order> getDate (@PathVariable String fecha,@PathVariable Integer id) throws ParseException{
         
-    return service.getDate(fecha,id);
+    return service.getRegisterDay(fecha,id);
     
     }
     

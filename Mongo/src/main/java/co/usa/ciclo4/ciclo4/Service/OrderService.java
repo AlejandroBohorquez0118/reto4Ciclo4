@@ -5,16 +5,21 @@
  */
 package co.usa.ciclo4.ciclo4.Service;
 
-
 import co.usa.ciclo4.ciclo4.Modelo.Order;
 import co.usa.ciclo4.ciclo4.Repository.crud.OrderRepository;
 import com.sun.org.apache.xerces.internal.impl.xpath.regex.REUtil;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
+
 import org.springframework.stereotype.Service;
 
 /**
@@ -23,123 +28,129 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class OrderService {
-    
-     @Autowired
+
+    @Autowired
+    private MongoTemplate mongoTemplate;
     private OrderRepository orderRepo;
-    
-    public List<Order> getAll(){
-    
+
+    public List<Order> getAll() {
+
         return orderRepo.getAll();
-        
+
     }
-    
-    public Order save(Order order){
-        Optional<Order> orderExist=orderRepo.getOrderById(order.getId());
-        
-        if (orderExist.isEmpty()){
-            
-        return orderRepo.save(order);
-        }
-        else{
-        return order;
+
+    public Order save(Order order) {
+        Optional<Order> orderExist = orderRepo.getOrderById(order.getId());
+
+        if (orderExist.isEmpty()) {
+
+            return orderRepo.save(order);
+        } else {
+            return order;
         }
     }
-    
-    public Order update(Order order){
-    
-        if(order.getId() == null){
-        
-        return order;
-        
-        }else{
+
+    public Order update(Order order) {
+
+        if (order.getId() == null) {
+
+            return order;
+
+        } else {
             Optional<Order> orderExist = orderRepo.getOrderById(order.getId());
-            if(orderExist.isPresent()){
-                if(order.getStatus() != null){
-                
-                orderExist.get().setStatus(order.getStatus());
-                
+            if (orderExist.isPresent()) {
+                if (order.getStatus() != null) {
+
+                    orderExist.get().setStatus(order.getStatus());
+
                 }
                 return orderRepo.save(orderExist.get());
-                }else{
-                
+            } else {
+
                 return order;
-                
-                }
-                
-                }
-                
-                }
-        
-        
-        
-        
-    
-    
-    
-    
-    public Integer deleteOrder(Integer id){
-    Optional<Order> orderExist = orderRepo.getOrderById(id);
-        
-        if(!orderExist.isEmpty() ){
-            
-        orderRepo.deleteOrder(id);
-        return null;
+
+            }
+
         }
-        else{
-        return id;
+
+    }
+
+    public Integer deleteOrder(Integer id) {
+        Optional<Order> orderExist = orderRepo.getOrderById(id);
+
+        if (!orderExist.isEmpty()) {
+
+            orderRepo.deleteOrder(id);
+            return null;
+        } else {
+            return id;
         }
     }
-    
-    
-    public Order getById(Integer id){
-        
-    Optional<Order> orderExist= orderRepo.getOrderById(id);
-        if(orderExist.isPresent()){
-        
-        return orderExist.get();
-        }
-        else{
-        
-        return new Order();
+
+    public Order getById(Integer id) {
+
+        Optional<Order> orderExist = orderRepo.getOrderById(id);
+        if (orderExist.isPresent()) {
+
+            return orderExist.get();
+        } else {
+
+            return new Order();
         }
     }
-    
-    public List<Order> getZone(String country){
-    
+
+    public List<Order> getZone(String country) {
+
         return orderRepo.getZone(country);
-    
+
     }
-    
-    public List<Order> getStatus(String zone){
-    
+
+    public List<Order> getStatus(String zone) {
+
         return orderRepo.getStatus(zone);
-    
+
     }
-    
-    
-    
-    public List<Order> findBySalesManId(Integer id){
-    
+
+    public List<Order> findBySalesManId(Integer id) {
+
         return orderRepo.findBySalesManId(id);
-    
+
     }
 
-    public List<Order> getDate(String fecha, Integer id) throws ParseException{
-        SimpleDateFormat dateDay = new SimpleDateFormat("yyyy-MM-dd");
-        System.out.println(fecha);
-        Date date = dateDay.parse(fecha);
-        System.out.println(date);
-        return orderRepo.getDate(date, id);
-        
-    }
-    
-    public List<Order> getStatusById(String status, Integer id){
-    
+//    public List<Order> getDate(String fecha, Integer id) throws ParseException {
+//
+//        DateTimeFormatter dateDay = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+//        
+//        //Date date = dateDay.parse(fecha);
+//       // System.out.println(date);
+//        //return orderRepo.getDate(date, id);
+//
+//    }
+
+    public List<Order> getStatusById(String status, Integer id) {
+
         return orderRepo.getStatusById(status, id);
-    
+
     }
 
-}
+    public List<Order> getRegisterDay(String dateStr, Integer id) {
 
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        Query query = new Query();
+
+        Criteria dateCriteria = Criteria.where("registerDay")
+                .gte(LocalDate.parse(dateStr, dtf).minusDays(1).atStartOfDay())
+                .lt(LocalDate.parse(dateStr, dtf).plusDays(1).atStartOfDay())
+                .and("salesMan.id").is(id);
+        query.addCriteria(dateCriteria);
+
+        List<Order> orders = mongoTemplate.find(query, Order.class);
+        System.out.println(orders);
+        return orders;
+
+    }
+    
+    
+}
 
 
