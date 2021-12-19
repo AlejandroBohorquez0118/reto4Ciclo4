@@ -82,6 +82,7 @@ public class OrderController {
     }
     
     @GetMapping("/{status}")
+    @ResponseStatus(HttpStatus.CREATED)
     public List<Order> getByStatus(@PathVariable String status){
     
         return service.getStatus(status);
