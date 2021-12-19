@@ -80,4 +80,10 @@ public class UserRepository {
     return userCrud.findByIdentification(identification);
     
     }
+    
+    public List<User> getByMonth(String month){
+    
+        return userCrud.findByMonthBirthtDay(month);
+    
+    }
 }

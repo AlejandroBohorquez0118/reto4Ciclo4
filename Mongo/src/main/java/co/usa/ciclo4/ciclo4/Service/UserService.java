@@ -159,6 +159,12 @@ public class UserService {
     }
     
     
+    public List<User> getByMonth(String month){
+    
+        return userRepo.getByMonth(month);
+    
+    }
+    
     }
 
 

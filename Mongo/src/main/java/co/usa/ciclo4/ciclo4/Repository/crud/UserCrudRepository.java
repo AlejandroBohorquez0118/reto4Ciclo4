@@ -51,4 +51,5 @@ public interface UserCrudRepository extends MongoRepository<User, Integer> {
 
     public Optional<User> findByIdentification(String identification);
     
+    public List<User> findByMonthBirthtDay(String month);
 }
