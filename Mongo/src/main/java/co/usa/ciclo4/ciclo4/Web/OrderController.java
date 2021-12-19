@@ -52,7 +52,7 @@ public class OrderController {
     }
     
     @GetMapping("/{id}")
-    public Order getById(@PathVariable("id") Integer id){
+    public Order getById(@PathVariable Integer id){
         
         return service.getById(id);
     
@@ -80,14 +80,13 @@ public class OrderController {
        return  service.deleteOrder(id);
     
     }
-    
+    /*
     @GetMapping("/{status}")
-    @ResponseStatus(HttpStatus.CREATED)
     public List<Order> getByStatus(@PathVariable String status){
     
         return service.getStatus(status);
     
-    }
+    }*/
     
     @GetMapping("/zona/{zone}")
     public List<Order> getByZone(@PathVariable String zone){

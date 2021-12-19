@@ -9,7 +9,6 @@ import co.usa.ciclo4.ciclo4.Modelo.User;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.core.CrudMethods;
 import org.springframework.stereotype.Repository;
 
 /**
