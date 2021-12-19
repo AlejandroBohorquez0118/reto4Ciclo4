@@ -66,8 +66,8 @@ public class OrderService {
                     orderExist.get().setStatus(order.getStatus());
 
                 }
-                orderRepo.save(orderExist.get());
-                return (Order) orderRepo.getAll();
+                
+                return orderRepo.save(orderExist.get());
             } else {
 
                 return order;

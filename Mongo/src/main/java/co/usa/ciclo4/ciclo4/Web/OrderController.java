@@ -96,6 +96,7 @@ public class OrderController {
     }
     
     @PutMapping("/update")
+    @ResponseStatus(HttpStatus.CREATED)
     public Order update(@RequestBody Order order){
     
         return service.update(order);
