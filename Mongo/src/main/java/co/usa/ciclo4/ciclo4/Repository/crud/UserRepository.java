@@ -74,4 +74,10 @@ public class UserRepository {
     return userCrud.findByIdentificationAndCellPhoneAndEmailAndPasswordAndName(Identification, cellPhone, email, password, name);
     
     }
+    
+    public Optional<User> getByIdentification(String identification){
+    
+    return userCrud.findByIdentification(identification);
+    
+    }
 }

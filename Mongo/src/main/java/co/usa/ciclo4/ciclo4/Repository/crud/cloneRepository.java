@@ -43,5 +43,16 @@ public class cloneRepository {
     cloneCrud.deleteById(id);
     
     }
-
+    
+    public List<Clone> getByDescription (String description){
+     
+       return cloneCrud.findByDescriptionContainingIgnoreCase(description);
+        
+    }
+    
+    public List<Clone> getPrice (Double price){
+    
+        return cloneCrud.findByPriceLessThanEqual(price);
+        
+    }
 }

@@ -128,4 +128,12 @@ public class UserController {
     
     }
     
+    @GetMapping("/identification/{identification}")
+    public Optional<User> getByIdentification(@PathVariable String identification){
+    
+        return service.getByIdentification(identification);
+    
+    }
+    
+    
 }

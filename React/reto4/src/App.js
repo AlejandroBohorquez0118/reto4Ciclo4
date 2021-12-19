@@ -1,23 +1,19 @@
-import logo from './image_48.png';
-import './App.css';
+import { Routes, Route } from "react-router-dom"
+import Login from "./componentes/js/Login"
+import Main from "./componentes/js/Main";
+import Productos from "./componentes/js/Productos";
+import Usuarios from "./componentes/js/Usuarios";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> Porongaaaaaa.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/main" element={<Main />} />
+        <Route path="/usuarios" element={<Usuarios />} />
+        <Route path="/productos" element={<Productos />} />
+      </Routes>
     </div>
   );
 }

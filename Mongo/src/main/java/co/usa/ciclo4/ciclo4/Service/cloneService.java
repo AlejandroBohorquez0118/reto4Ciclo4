@@ -129,4 +129,16 @@ public class cloneService {
     
     }
     
+    public List<Clone> getByDescription(String description){
+    
+        return cloneRepo.getByDescription(description);
+    
+    }
+    
+    public List<Clone> getPrice(Double price){
+    
+        return cloneRepo.getPrice(price);
+    
+    }
+    
 }

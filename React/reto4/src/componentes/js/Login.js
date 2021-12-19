@@ -1,15 +1,17 @@
-import dark from '../../Imagen7.png';
 import { InputGroup, Row } from "react-bootstrap";
 import { FormControl } from "react-bootstrap";
 import "../css/Login.css"
 import { Card } from "react-bootstrap"
-import { Button } from "react-bootstrap"
 import Example from './ModalCreaUs';
+import BuscarUsuario from "../componentes/BotonLog"
+import BotonLog from "../componentes/BotonLog";
 
 
-function Login() {
+
+
+const Login = () => {
   return (
-    <>
+    
       <Row className='justify-content-md-center'>
         <div className='col-lg-4 col-centenetworking'>
 
@@ -33,6 +35,7 @@ function Login() {
                   placeholder="Nombre de Usuario"
                   aria-label="Username"
                   aria-describedby="basic-addon1"
+                  id = "usuarioLog"
                 />
               </InputGroup>
 
@@ -48,21 +51,25 @@ function Login() {
                   placeholder="Contraseña"
                   aria-label="Username"
                   aria-describedby="basic-addon1"
+                  id = "contraseñaLog"
                 />
               </InputGroup>
 
               <br></br>
-              <Button variant="secondary">Ingresar</Button>{' '}&nbsp;
+              {<BotonLog />} &nbsp;
               {<Example />}
               
             </Card.Body>
           </Card>
         </div>
       </Row>
-    </>
+    
+    
   );
 }
 
 
 
 export default Login;
+
+

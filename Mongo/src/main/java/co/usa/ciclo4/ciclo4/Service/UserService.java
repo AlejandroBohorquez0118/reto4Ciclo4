@@ -152,6 +152,13 @@ public class UserService {
         }
     }
     
+    public Optional<User> getByIdentification(String identification){
+        
+        return userRepo.getByIdentification(identification);
+     
+    }
     
-}
+    
+    }
+
 

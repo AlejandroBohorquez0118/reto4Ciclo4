@@ -9,6 +9,7 @@ import co.usa.ciclo4.ciclo4.Modelo.User;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.mongodb.repository.Query;
 
 /**
  *
@@ -47,4 +48,7 @@ public interface UserCrudRepository extends MongoRepository<User, Integer> {
     public Optional<User> findByEmailAndPassword(String email, String password);
     
     public List<User> findByIdentificationAndCellPhoneAndEmailAndPasswordAndName(String Identification,String cellPhone, String email, String password, String Name);
+
+    public Optional<User> findByIdentification(String identification);
+    
 }

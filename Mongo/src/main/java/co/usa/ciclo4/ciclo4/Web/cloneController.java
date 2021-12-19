@@ -88,4 +88,17 @@ public class cloneController {
     
     }
     
+    @GetMapping("/description/{description}")
+    public List<Clone> getByDescription(@PathVariable String description){
+    
+        return service.getByDescription(description);
+    
+    }
+    
+    @GetMapping("/price/{price}")
+    public List<Clone> getPrice(@PathVariable Double price){
+    
+        return service.getPrice(price);
+    
+    }
 }
